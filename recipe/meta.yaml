@@ -1,6 +1,6 @@
 {% set dataset_name = "INCL" %}
-{% set version = "1.0" %}
-{% set sha256 = "4019fff54f4e7d9bad33fe73cd4fd61b6ea5e0750f5053eb4e8ca28635f224f1" %}
+{% set version = "1.1" %}
+{% set sha256 = "5d82e71db5f5a1b659937506576be58db7de7753ec5913128141ae7fce673b44" %}
 {% set env_var = "G4INCLDATA" %}
 {% set summary = "GEANT4 data files for proton and neutron density profiles in INCL" %}
 
@@ -8,21 +8,21 @@
 {% set install_dir = "share/Geant4/data/"+dataset_name+version %}
 
 package:
-    name: {{ name }}
-    version: {{ version }}
+  name: {{ name }}
+  version: {{ version }}
 
 source:
-    url: https://geant4-data.web.cern.ch/geant4-data/datasets/G4{{ dataset_name }}.{{ version }}.tar.gz
-    sha256: {{ sha256 }}
-    folder: dataset
+  url: https://geant4-data.web.cern.ch/geant4-data/datasets/G4{{ dataset_name }}.{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+  folder: dataset
 
 build:
-    number: 0
-    noarch: generic
-    script:
-        - mkdir -p ${PREFIX}/{{ install_dir }}
-        - cp -r dataset/* ${PREFIX}/{{ install_dir }}
-        - ${RECIPE_DIR}/create_activation_scripts.sh {{ name }} {{ env_var }} {{ install_dir }}
+  number: 0
+  noarch: generic
+  script:
+    - mkdir -p ${PREFIX}/{{ install_dir }}
+    - cp -r dataset/* ${PREFIX}/{{ install_dir }}
+    - ${RECIPE_DIR}/create_activation_scripts.sh {{ name }} {{ env_var }} {{ install_dir }}
 
 # Conda-forge is unable to build packages that have no dependencies so add
 # `make` as a dummy build dependency
@@ -31,16 +31,16 @@ requirements:
     - make
 
 test:
-    commands:
-        - "[ \"${{ env_var }}\" == \"$CONDA_PREFIX/{{ install_dir }}\" ]"
+  commands:
+    - '[ "${{ env_var }}" == "$CONDA_PREFIX/{{ install_dir }}" ]'
 
 about:
-    home: https://geant4.web.cern.ch/
-    summary: '{{ summary }}'
-    license: OTHER
-    license_file: CREDIT
+  home: https://geant4.web.cern.ch/
+  summary: {{ summary }}
+  license: OTHER
+  license_file: CREDIT
 
 extra:
-    recipe-maintainers:
-        - tschoonj
-        - chrisburr
+  recipe-maintainers:
+    - tschoonj
+    - chrisburr
