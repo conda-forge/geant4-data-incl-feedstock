@@ -1,6 +1,6 @@
 {% set dataset_name = "INCL" %}
-{% set version = "1.2" %}
-{% set sha256 = "f880b16073ee0a92d7494f3276a6d52d4de1d3677a0d4c7c58700396ed0e1a7e" %}
+{% set version = "1.3" %}
+{% set sha256 = "e4b3dbe52acef53536454e22443091212843821bd23628eed846d299599f3bf9" %}
 {% set env_var = "G4INCLDATA" %}
 {% set summary = "GEANT4 data files for proton and neutron density profiles in INCL" %}
 
@@ -17,7 +17,7 @@ source:
   folder: dataset
 
 build:
-  number: 1
+  number: 0
   noarch: generic
   script:
     - mkdir -p ${PREFIX}/{{ install_dir }}
